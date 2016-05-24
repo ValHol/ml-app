@@ -1,7 +1,8 @@
 package ar.valhol.mlapp.data
 
 data class Category(val id: String,
-                    val name: String)
+                    val name: String,
+                    val picture: String?)
 
 data class Address(val state_id: String,
                    val state_name: String,
@@ -18,5 +19,5 @@ data class Result(val id: String,
                   val thumbnail: String,
                   val address: Address)
 
-data class Search(val site_id: String,
-                  val results: List<Result>)
+data class ApiSearch(val site_id: String,
+                     val results: List<Result>)
