@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ar.valhol.mlapp.SquaredRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="match_parent"
+                                       android:padding="16dp">
+
+    <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"/>
+
+    <TextView
+            android:id="@+id/categoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/textColor"
+            android:gravity="center"
+            android:text="asd"
+            android:textSize="24sp"
+            android:shadowColor="@color/textShadow"
+            android:shadowDx="2"
+            android:shadowDy="1"
+            android:shadowRadius="5"/>
+
+</ar.valhol.mlapp.SquaredRelativeLayout>
