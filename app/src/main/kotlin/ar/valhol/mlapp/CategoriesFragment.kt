@@ -1,30 +1,21 @@
 package ar.valhol.mlapp
 
-import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import ar.valhol.mlapp.ApiInterface
-import ar.valhol.mlapp.MainActivity
-import ar.valhol.mlapp.R
-import ar.valhol.mlapp.data.ApiSearch
 import ar.valhol.mlapp.data.Category
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.content_main.*
-import org.jetbrains.anko.activityManager
 import org.jetbrains.anko.find
 import org.jetbrains.anko.onClick
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.find
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,8 +32,6 @@ class CategoriesFragment : Fragment() {
 
     lateinit var mApiInterface: ApiInterface
     lateinit var mRecyclerView: RecyclerView
-    lateinit var mProgressBar: ProgressBar
-
     lateinit var mMainActivity: MainActivity
 
     var mCategorySize: Int = 0
@@ -50,7 +39,6 @@ class CategoriesFragment : Fragment() {
     var mRetrievedItems: Int by Delegates.observable(0) {
         d, old, new ->
         if (mCategorySize != 0) {
-            mProgressBar.progress = new / mCategorySize * 100
             if (new == mCategorySize) setupRecyclerView()
         }
     }
@@ -76,13 +64,11 @@ class CategoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mRecyclerView = find<RecyclerView>(R.id.categoryList)
         mRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        mProgressBar = find<ProgressBar>(R.id.progressBar)
     }
 
     private fun setupRecyclerView() {
         mRecyclerView.adapter = CategoryAdapter(mCategoryList, mMainActivity)
-        mProgressBar.visibility = View.INVISIBLE
-        find<TextView>(R.id.loadingText).visibility = View.INVISIBLE
+        find<TextView>(R.id.loadingText).visibility = View.GONE
     }
 
     private fun getCategories() {
@@ -90,7 +76,6 @@ class CategoriesFragment : Fragment() {
         mCategorySize = 0
         mRetrievedItems = 0
         find<TextView>(R.id.loadingText).visibility = View.VISIBLE
-        mProgressBar.visibility = View.VISIBLE
 
         mApiInterface.getCategories().enqueue(object : Callback<List<Category>?> {
             override fun onResponse(call: Call<List<Category>?>?, response: Response<List<Category>?>?) {

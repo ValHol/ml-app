@@ -2,14 +2,13 @@
 <LinearLayout
         android:layout_height="@dimen/item_height"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
         android:orientation="horizontal"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v4.widget.CircleImageView
+    <ImageView
+            android:id="@+id/imageHolder"
             android:layout_width="@dimen/item_height"
-            android:layout_height="@dimen/item_height"
-            android:background="@color/colorAccent"/>
+            android:layout_height="@dimen/item_height"/>
 
     <LinearLayout
             android:orientation="vertical"
@@ -19,12 +18,15 @@
             android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
+                android:id="@+id/productName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:singleLine="true"
                 android:text="Titles"/>
+
         <TextView
+                android:id="@+id/productPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
